@@ -10,6 +10,7 @@ const DB3 = DB.Sheets['DB3']
 
 
 let tabelaCorrelacao = []
+let tabelaRegressLinear = []
 
 //x
 const DB_PH = []
@@ -18,7 +19,7 @@ const DB_PH = []
 const DB_Turbidez = []
 
 
-
+// Faz a leitura das colunas B e C no excel e adicona dentro de vetores.
 for (const cellAdress in DB3){
 
 
@@ -39,27 +40,25 @@ for (const cellAdress in DB3){
 }
 
 
-//Não esta sendo usado.
+//Modelo de dados da biblioteca para leitura do vetor para calculo da regressão linear
 for (var i = 0; i< DB_PH.length;i++)
 {
-    var obj  = {} 
+    var vet = []
 
-    obj.ph = DB_PH[i]
-    obj.turb = DB_Turbidez[i]
+    vet.push(DB_PH[i], DB_Turbidez[i])
 
-    obj.x2 = Math.pow(DB_PH[i],2)
-    obj.y2 = Math.pow(DB_Turbidez[i],2)
-
-    obj.multXY = DB_PH[i] * DB_Turbidez[i]
-
-    tabelaCorrelacao.push(obj)
-
+    tabelaRegressLinear.push(vet)
 }
 
 const CORRELACAO = statisci.sampleCorrelation(DB_PH, DB_Turbidez)
 
 console.log(CORRELACAO)
+console.log(tabelaRegressLinear)
 
-function calculaRegressaoLinear(){
-    
+const REGRESS = statisci.linearRegression(tabelaRegressLinear)
+
+function calculaRegress(x){
+    return ((-17.21976906484688*x)+ 133.30326253764596)
 }
+
+console.log(calculaRegress(5.85))
