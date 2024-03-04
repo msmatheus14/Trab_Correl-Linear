@@ -52,13 +52,13 @@ for (var i = 0; i< DB_PH.length;i++)
 
 const CORRELACAO = statisci.sampleCorrelation(DB_PH, DB_Turbidez)
 
-console.log(CORRELACAO)
-console.log(tabelaRegressLinear)
+
 
 const REGRESS = statisci.linearRegression(tabelaRegressLinear)
 
 function calculaRegress(x){
-    return ((-17.21976906484688*x)+ 133.30326253764596)
+    return ((REGRESS.m*x)+ REGRESS.b)
 }
 
-console.log(calculaRegress(5.85))
+console.log("Valor Correlação: ", CORRELACAO)
+console.log("Valor de Y a partir de X: ",calculaRegress(5.85))
