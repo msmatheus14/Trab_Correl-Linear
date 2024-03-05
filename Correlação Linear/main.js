@@ -1,9 +1,5 @@
 
-
 const XLSX = require('xlsx');
-const statisci = require('simple-statistics');
-
-let dadosRegressao = []
 
 const ctx = document.getElementById('scatterChart').getContext('2d');
 const scatterChart = new Chart(ctx, {
@@ -87,39 +83,19 @@ function readExcel(file) {
             th.textContent = columnName;
             row.appendChild(th);
         });
-   
+z   
         for (let i = 0; i < 10; i++) {
             const row = table.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             const cell3 = row.insertCell(2);
             cell1.textContent = phAgua[i];
-            cell2.textContent = turbidez[i]; 
-            
-            cell3.textContent =  REGRESS.b
+            cell2.textContent = turbidez[i];
+            cell3.textContent = (turbidez[i] + phAgua[i]).toFixed(2);
         }
-
-           
 
     };
 }
-
- for (var i = 0; i< phAgua.length;i++)
-            {
-                let vet = []
-
-                vet.push(phAgua[i])
-                vet.push(turbidez[i])
-
-                dadosRegressao.push(vet)
-
-
-            }
-       
-        
-const REGRESS  = statisci.linearRegression(dadosRegressao)
-
-
 
 const input = document.getElementById('excelFile');
 
